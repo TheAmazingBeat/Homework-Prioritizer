@@ -1,0 +1,80 @@
+body {
+  background-color: powderblue;
+  font-family: 'Quicksand';
+}
+
+.class-form {
+  margin-left: 39%;
+}
+
+.class-form-input {
+  margin-top: 15px;
+  width: 250px;
+}
+
+.difficulty {
+  margin-left: 525px;
+}
+
+.instructions {
+  margin-left: 525px;
+  margin-top: 50px;
+}
+
+.invisible {
+  display: none;
+}
+
+.middle {
+  margin-left: 630px;
+}
+
+.next-button {
+  margin-top: 15px;
+}
+
+.select-difficulty {
+  margin-left: 25px;
+}
+
+.start-button {
+  background-color: grey;
+  border: 0;
+  border-radius: 5px;
+  color: white;
+  font-family: 'Quicksand';
+  font-size: 20px;
+  height: 75px;
+  width: 125px;
+}
+
+.start-div {
+  padding-left: 45%;
+  padding-top: 5%;
+}
+
+.start-button:hover {
+  background-color: darkgrey;
+}
+
+.submit-button {
+  background-color: grey;
+  border: 0;
+  border-radius: 5px;
+  color: white;
+  font-family: 'Quicksand';
+  height: 30px;
+  margin-left: 5px;
+  margin-top: 10px;
+  width: 50px;
+}
+
+.submit-button:hover {
+  background-color: darkgrey;
+}
+
+.title {
+  height: 20px;
+  margin-top: 10px;
+  text-align: center;
+}

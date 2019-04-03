@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Homework Prioritizer</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <div class="title">
+      <h1>Homework Prioritizer</h1>
+    </div>
+
+    <h3 class="instructions invisible">Write the name of your classes in order:</h3>
+
+    <!--Start Button-->
+    <div class="start-div">
+      <button class="start-button" onclick="start();">Start</button>
+    </div>
+
+    <!--Number of Classes Input-->
+    <div class="num-class-form middle invisible">
+      <input class="number-of-classes" type="number"><br>
+      <button class="submit-button" type="button" onclick="createClassForm()">Next</button>
+    </div>
+
+    <!--List of Classes Input-->
+    <div class="class-form invisible">
+    </div>
+
+    <!--Dropdown for difficulty of each class-->
+    <div class="difficulty invisible">
+        <li class="classes-list" style="list-style-type:none">
+
+        </li>
+    </div>
+
+    <!--Menu to add homework and prioritize them-->
+    <div class="hw-manager invisible">
+      <button class"hw-button" type="button" name="hw-adder" onclick="addHomework()">Add Homework</button>
+      <li class="hw-list" style="list-style-type:none">
+
+      </li>
+      <button class="prioritize-button" type="button" name="prioritize" onclick="prioritize(hwCounter.length)">Prioritize!</button>
+    </div>
+    <script src="script_v2.js"></script>
+  </body>
+
+</html>
