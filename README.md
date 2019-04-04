@@ -6,6 +6,8 @@ To-do:
 3) Make class menu instead of step-by-step
 4) The difficulty dropdown subtracts a number if already selected
 
+
+
 Class Menu:
 - Add class button
 - Name of class text input
