@@ -59,7 +59,7 @@ function createClassForm() {
   createNextButton(0);
 
   /*stores the name of the classes into classes.name*/
-  document.querySelectorAll(".next-button")[0].onclick = function() {
+  document.querySelectorAll(".next-button")[0].onclick = function () {
     for (i = 0; i < (numOfClasses.value); i++) {
       classes[i] = new Object();
       classes[i].name = document.querySelectorAll(".class-form-input")[i].value;
@@ -109,7 +109,7 @@ function difficulty() {
   createNextButton(1);
 
   /*stores the difficulty of each class into classDifficulty*/
-  document.querySelectorAll(".next-button")[1].onclick = function() {
+  document.querySelectorAll(".next-button")[1].onclick = function () {
     for (z = 0; z < numOfClasses.value; z++) {
       classes[z].difficulty = document.querySelectorAll(".select-difficulty")[z].value;
     }
@@ -127,20 +127,20 @@ function addHomework() {
   var homeworkItem = document.createElement("ul");
 
   var hwInput = document.createElement("input");
-    hwInput.type = "text";
-    hwInput.classList.add("homework-input");
+  hwInput.type = "text";
+  hwInput.classList.add("homework-input");
 
   /*creates a dropdown menu for homework type, then the options in it*/
   var hwType = document.createElement("select");
-    hwType.classList.add("hw-type-dropdown");
+  hwType.classList.add("hw-type-dropdown");
   var homeworkMinor = document.createElement("option");
-    homeworkMinor.label = "Minor";
-    homeworkMinor.setAttribute("value", "Minor");
+  homeworkMinor.label = "Minor";
+  homeworkMinor.setAttribute("value", "Minor");
   var homeworkMajor = document.createElement("option");
-    homeworkMajor.label = "Major";
-    homeworkMajor.setAttribute("value", "Major");
-    hwType.appendChild(homeworkMinor);
-    hwType.appendChild(homeworkMajor);
+  homeworkMajor.label = "Major";
+  homeworkMajor.setAttribute("value", "Major");
+  hwType.appendChild(homeworkMinor);
+  hwType.appendChild(homeworkMajor);
 
   /*creates a dropdown menu for homework type, the options in it*/
   var hwClass = document.createElement("select");
@@ -148,9 +148,9 @@ function addHomework() {
   for (i = 0; i < numOfClasses.value; i++) {
     var classOption = document.createElement("option");
     var classOptionName = document.createTextNode(classes[i].name);
-      classOption.appendChild(classOptionName);
-      classOption.setAttribute("value", classes[i].difficulty);
-      hwClass.appendChild(classOption);
+    classOption.appendChild(classOptionName);
+    classOption.setAttribute("value", classes[i].difficulty);
+    hwClass.appendChild(classOption);
   }
 
   /*creates a date dropdown menu*/
@@ -168,7 +168,7 @@ function addHomework() {
 
 
 /*stores all values from input elements created in addHomework()*/
-function storeHW(numOfHw){
+function storeHW(numOfHw) {
   for (i = 0; i < numOfHw; i++) {
     homeworks[i] = new Object();
     homeworks[i].name = document.querySelectorAll(".homework-input")[i].value;
@@ -188,11 +188,11 @@ function prioritize(numOfHw) {
     if (homeworks[i].type === 'Major') { //if it is a major homework, it will be the very first
       priorList.unshift(homeworks[i].name);
     } else if (homeworks[i].classDiff >= (Math.max(...homeworks[i].difficulty))) {
-        if(priorList.indexOf(priorList[i-1]) == 0 && homeworks[i-1].type != 'Major'){ //replaces the one in front, if and only the front is not a major homework
-          priorList.splice(0, 0, homeworks[i].name);
-        } else {
-          priorList.splice(1, 0, homeworks[i].name);
-        }
+      if (priorList.indexOf(priorList[i - 1]) == 0 && homeworks[i - 1].type != 'Major') { //replaces the one in front, if and only the front is not a major homework
+        priorList.splice(0, 0, homeworks[i].name);
+      } else {
+        priorList.splice(1, 0, homeworks[i].name);
+      }
     } else if (homeworks[i].classDiff >= 8) { //8 and 9 difficulty are near the first
       priorList.splice(priorList.length - 4, 0, homeworks[i].name);
     } else if (homeworks[i].classDiff >= 6) { //6 and 7 difficulty are near the first
@@ -210,9 +210,9 @@ function prioritize(numOfHw) {
   /*shows the priority onto the web page*/
   document.querySelector(".hw-manager").appendChild(document.createElement("h3")).innerText = "Here's how you should do your homework in order";
 
-  for(x = 0; x < numOfHw; x++){
+  for (x = 0; x < numOfHw; x++) {
     var priorHomework = document.createElement("ul");
-    var priorHomeworkName = document.createTextNode((x+1) + ") " + priorList[x]);
+    var priorHomeworkName = document.createTextNode((x + 1) + ") " + priorList[x]);
     priorHomework.appendChild(priorHomeworkName);
     document.querySelector(".hw-manager").appendChild(priorHomework);
   }
