@@ -1,125 +1,140 @@
 /*These are variables that are needed to be accessed in different functions*/
 var classes = [];
-classForm = document.querySelector(".class-form"); //the input for the name of the classes
+classesList = document.querySelector(".class-list");
 homeworks = [];
 hwCounter = [];
 instructions = document.querySelector(".instructions");
-numOfClasses = document.querySelector(".number-of-classes");
-numClassForm = document.querySelector(".num-class-form"); //the input for the number of classes
 priorList = [];
-startButton = document.querySelector(".start-button"); //start button
+var numOfClasses = 0
+var classItem;
 
 
 
-/*makes button invisible and number of classes input show
-sets minimum value to 1 class and maximum value to 10 classes*/
-function start() {
-    document.querySelector(".start-div").classList.add("invisible");
-    numClassForm.classList.toggle("invisible");
-    instructions.classList.toggle("invisible");
-    instructions.innerText = "How many classes do you have?";
-    numOfClasses.min = "1";
-    numOfClasses.max = "10";
+function addClass(){
+    numOfClasses++;
+
+    classItem = document.createElement("li");
+    classItem.classList.add("class-item");
+    var classInput = document.createElement("input");
+    classInput.classList.add("class-input");
+
+    classes.push("class-item");
+    classItem.appendChild(classInput);
+    classesList.appendChild(classItem);
 }
 
 
-/*creates the "next" button*/
-function createNextButton(whichButton) {
-    var nextButton = document.createElement("button");
-    var nextButtonText = document.createTextNode("Next");
-
-    nextButton.appendChild(nextButtonText);
-    if (whichButton == 0) {
-        nextButton.classList.add("submit-button");
-        nextButton.classList.add("next-button");
-        classForm.appendChild(nextButton);
-    } else if (whichButton == 1) {
-        nextButton.classList.add("submit-button");
-        nextButton.classList.add("next-button");
-        document.querySelector(".difficulty").appendChild(nextButton);
-    }
+function deleteClass(){
+    document.querySelector(".class-item").parentElement.removeChild(document.querySelector(".class-item"));
 }
 
 
-/*makes numClassForm invisible and shows the classForm*/
-function createClassForm() {
-    numClassForm.classList.toggle("invisible");
-    classForm.classList.toggle("invisible");
-    instructions.innerText = "Write the name of your classes in order:";
-
-    /*creates text inputs to write down the classes*/
-    for (i = 0; i < (numOfClasses.value); i++) {
-        var createClassForm = document.createElement("input");
-        createClassForm.type = "text";
-        createClassForm.classList.add("class-form-input");
-        classForm.appendChild(createClassForm);
-        classForm.appendChild(document.createElement("br"));
-    }
-
-    createNextButton(0);
-
-    /*stores the name of the classes into classes.name*/
-    document.querySelectorAll(".next-button")[0].onclick = function () {
-        for (i = 0; i < (numOfClasses.value); i++) {
-            classes[i] = new Object();
-            classes[i].name = document.querySelectorAll(".class-form-input")[i].value;
-        }
-        console.log(classes);
-        difficulty();
-    };
-}
-
-function difficulty() {
-    classForm.classList.toggle("invisible");
-    document.querySelector(".difficulty").classList.toggle("invisible");
-    instructions.innerText = "Rank your classes' difficulty from least to greatest:";
-
-    for (i = 0; i < (numOfClasses.value); i++) {
-        /*rewrites the classes in a list*/
-        var classItemList = document.createElement("ul");
-        var classItemListName = document.createTextNode(classes[i].name);
-        classItemList.appendChild(classItemListName);
-        classItemList.classList.add("class-item");
-        document.querySelector(".classes-list").appendChild(classItemList);
-
-        /*making difficulty dropdown menu*/
-        var difficultySelect = document.createElement("select");
-        difficultySelect.classList.add("select-difficulty");
-        var valueCounter = 1;
-
-        /*creates the options in dropdown menu*/
-        for (x = 0; x < (numOfClasses.value); x++) {
-            var difficultyOption = document.createElement("option");
-            var difficultyNum = document.createTextNode(valueCounter);
-            difficultyOption.appendChild(difficultyNum);
-            difficultyOption.setAttribute("value", valueCounter);
-            difficultySelect.appendChild(difficultyOption);
-            valueCounter++;
-        }
-
-        difficultySelect.options[i].selected = true;
-
-        /*makes the dropdown menu beside each item in the list*/
-        var classItems = document.querySelectorAll("ul.class-item");
-        for (y = 0; y < classItems.length; y++) {
-            classItems[y].appendChild(difficultySelect);
+function next(){
+    for (x = 0; x < numOfClasses; x++) {
+        if (document.querySelectorAll(".class-input")[x].value == "") {
+            document.querySelector(".alert").classList.toggle("invisible");
+        } else if (document.querySelector(".alert").classList.contains("invisible") == false){
+            document.querySelector(".alert").classList.toggle("invisible");
         }
     }
 
-    createNextButton(1);
+    for(i = 0; i < numOfClasses; i++){
+        classes[i] = new Object;
+        classes[i].name = document.querySelectorAll(".class-input")[i].value;
+    }
 
-    /*stores the difficulty of each class into classDifficulty*/
-    document.querySelectorAll(".next-button")[1].onclick = function () {
-        for (z = 0; z < numOfClasses.value; z++) {
-            classes[z].difficulty = document.querySelectorAll(".select-difficulty")[z].value;
-        }
-        console.log(classes);
-
-        document.querySelector(".difficulty").classList.toggle("invisible");
-        document.querySelector(".hw-manager").classList.toggle("invisible");
-        instructions.innerText = "Now, add your homework for any class";
-    };
+    document.querySelector(".hw-manager").classList.toggle("invisible");
 }
+
+
+
+
+
+
+
+
+
+
+
+// /*makes numClassForm invisible and shows the classForm*/
+// function createClassForm() {
+//     numClassForm.classList.toggle("invisible");
+//     classForm.classList.toggle("invisible");
+//     instructions.innerText = "Write the name of your classes in order:";
+
+//     /*creates text inputs to write down the classes*/
+//     for (i = 0; i < (numOfClasses.value); i++) {
+//         var createClassForm = document.createElement("input");
+//         createClassForm.type = "text";
+//         createClassForm.classList.add("class-form-input");
+//         classForm.appendChild(createClassForm);
+//         classForm.appendChild(document.createElement("br"));
+//     }
+
+//     createNextButton(0);
+
+//     /*stores the name of the classes into classes.name*/
+//     document.querySelectorAll(".next-button")[0].onclick = function () {
+//         for (i = 0; i < (numOfClasses.value); i++) {
+//             classes[i] = new Object();
+//             classes[i].name = document.querySelectorAll(".class-form-input")[i].value;
+//         }
+//         console.log(classes);
+//         difficulty();
+//     };
+// }
+
+// function difficulty() {
+//     classForm.classList.toggle("invisible");
+//     document.querySelector(".difficulty").classList.toggle("invisible");
+//     instructions.innerText = "Rank your classes' difficulty from least to greatest:";
+
+//     for (i = 0; i < (numOfClasses.value); i++) {
+//         /*rewrites the classes in a list*/
+//         var classItemList = document.createElement("ul");
+//         var classItemListName = document.createTextNode(classes[i].name);
+//         classItemList.appendChild(classItemListName);
+//         classItemList.classList.add("class-item");
+//         document.querySelector(".classes-list").appendChild(classItemList);
+
+//         /*making difficulty dropdown menu*/
+//         var difficultySelect = document.createElement("select");
+//         difficultySelect.classList.add("select-difficulty");
+//         var valueCounter = 1;
+
+//         /*creates the options in dropdown menu*/
+//         for (x = 0; x < (numOfClasses.value); x++) {
+//             var difficultyOption = document.createElement("option");
+//             var difficultyNum = document.createTextNode(valueCounter);
+//             difficultyOption.appendChild(difficultyNum);
+//             difficultyOption.setAttribute("value", valueCounter);
+//             difficultySelect.appendChild(difficultyOption);
+//             valueCounter++;
+//         }
+
+//         difficultySelect.options[i].selected = true;
+
+//         /*makes the dropdown menu beside each item in the list*/
+//         var classItems = document.querySelectorAll("ul.class-item");
+//         for (y = 0; y < classItems.length; y++) {
+//             classItems[y].appendChild(difficultySelect);
+//         }
+//     }
+
+//     createNextButton(1);
+
+//     /*stores the difficulty of each class into classDifficulty*/
+//     document.querySelectorAll(".next-button")[1].onclick = function () {
+//         for (z = 0; z < numOfClasses.value; z++) {
+//             classes[z].difficulty = document.querySelectorAll(".select-difficulty")[z].value;
+//         }
+//         console.log(classes);
+
+//         document.querySelector(".difficulty").classList.toggle("invisible");
+//         document.querySelector(".hw-manager").classList.toggle("invisible");
+//         instructions.innerText = "Now, add your homework for any class";
+//     };
+// }
 
 
 /*Adds a text input, dropdown menus for type, class, and due date*/
@@ -142,16 +157,16 @@ function addHomework() {
     hwType.appendChild(homeworkMinor);
     hwType.appendChild(homeworkMajor);
 
-    /*creates a dropdown menu for homework type, the options in it*/
-    var hwClass = document.createElement("select");
-    hwClass.classList.add("hw-class");
-    for (i = 0; i < numOfClasses.value; i++) {
-        var classOption = document.createElement("option");
-        var classOptionName = document.createTextNode(classes[i].name);
-        classOption.appendChild(classOptionName);
-        classOption.setAttribute("value", classes[i].difficulty);
-        hwClass.appendChild(classOption);
-    }
+    // /*creates a dropdown menu for homework type, the options in it*/
+    // var hwClass = document.createElement("select");
+    // hwClass.classList.add("hw-class");
+    // for (i = 0; i < numOfClasses.value; i++) {
+    //     var classOption = document.createElement("option");
+    //     var classOptionName = document.createTextNode(classes[i].name);
+    //     classOption.appendChild(classOptionName);
+    //     classOption.setAttribute("value", classes[i].difficulty);
+    //     hwClass.appendChild(classOption);
+    // }
 
     /*creates a date dropdown menu*/
     var hwDate = document.createElement("input");
@@ -160,7 +175,7 @@ function addHomework() {
 
     homeworkItem.appendChild(hwInput);
     homeworkItem.appendChild(hwType);
-    homeworkItem.appendChild(hwClass);
+    // homeworkItem.appendChild(hwClass);
     homeworkItem.appendChild(hwDate);
 
     hwCounter.push(document.querySelector(".hw-list").appendChild(homeworkItem));

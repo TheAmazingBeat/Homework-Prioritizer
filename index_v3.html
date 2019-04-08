@@ -5,7 +5,7 @@
     <title>Homework Prioritizer</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles_v3.css">
 </head>
 
 <body>
@@ -13,28 +13,17 @@
         <h1>Homework Prioritizer</h1>
     </div>
 
-    <h3 class="instructions invisible">Write the name of your classes in order:</h3>
+    <h3 class="instructions">Write the name of your classes:</h3>
 
-    <!--Start Button-->
-    <div class="start-div">
-        <button class="start-button" onclick="start();">Start</button>
-    </div>
+    <!--Class Menu-->
+    <div class="class-menu">
+        <button onclick="addClass()">Add Class</button>
+        <button onclick="deleteClass()">Delete Class</button>
+        <p class="invisible alert" style="color: red;">Please fill out the blanks</p>
+        <ol class="class-list">
 
-    <!--Number of Classes Input-->
-    <div class="num-class-form middle invisible">
-        <input class="number-of-classes" type="number"><br>
-        <button class="submit-button" type="button" onclick="createClassForm()">Next</button>
-    </div>
-
-    <!--List of Classes Input-->
-    <div class="class-form invisible">
-    </div>
-
-    <!--Dropdown for difficulty of each class-->
-    <div class="difficulty invisible">
-        <li class="classes-list" style="list-style-type:none">
-
-        </li>
+        </ol>
+        <button onclick="next()">Next</button>
     </div>
 
     <!--Menu to add homework and prioritize them-->
@@ -43,8 +32,7 @@
         <li class="hw-list" style="list-style-type:none">
 
         </li>
-        <button class="prioritize-button" type="button" name="prioritize"
-            onclick="prioritize(hwCounter.length)">Prioritize!</button>
+        <button class="prioritize-button" type="button" onclick="prioritize(hwCounter.length)">Prioritize!</button>
     </div>
     <script src="script_v3.js"></script>
 </body>
