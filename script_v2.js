@@ -142,7 +142,7 @@ function addHomework() {
   hwType.appendChild(homeworkMinor);
   hwType.appendChild(homeworkMajor);
 
-  /*creates a dropdown menu for homework type, the options in it*/
+  /*creates a dropdown menu for what class the homework is for, the options in it*/
   var hwClass = document.createElement("select");
   hwClass.classList.add("hw-class");
   for (i = 0; i < numOfClasses.value; i++) {

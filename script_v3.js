@@ -5,9 +5,13 @@ homeworks = [];
 hwCounter = [];
 instructions = document.querySelector(".instructions");
 priorList = [];
-var numOfClasses = 0
+var numOfClasses = 0;
 var classItem;
 
+var date = new Data();
+var year = date.getFullYear();
+var month = date.getMonth() + 1;
+var day = date.getDate();
 
 
 function addClass(){
@@ -17,6 +21,7 @@ function addClass(){
     classItem.classList.add("class-item");
     var classInput = document.createElement("input");
     classInput.classList.add("class-input");
+    classInput.type = "text";
 
     classes.push("class-item");
     classItem.appendChild(classInput);
@@ -33,113 +38,32 @@ function next(){
     for (x = 0; x < numOfClasses; x++) {
         if (document.querySelectorAll(".class-input")[x].value == "") {
             document.querySelector(".alert").classList.toggle("invisible");
+            console.log("invisible");
         } else if (document.querySelector(".alert").classList.contains("invisible") == false){
             document.querySelector(".alert").classList.toggle("invisible");
+            console.log("not invisible");
         }
     }
 
     for(i = 0; i < numOfClasses; i++){
-        classes[i] = new Object;
+        classes[i] = new Object();
         classes[i].name = document.querySelectorAll(".class-input")[i].value;
+
+        document.querySelectorAll(".class-input")[i].readOnly = "true";
     }
 
-    document.querySelector(".hw-manager").classList.toggle("invisible");
+    for (y = 0; y < document.querySelectorAll(".class-menu-button").length; y++){
+        document.querySelectorAll(".class-menu-button")[y].classList.toggle("invisible");
+    }
+
+    document.querySelector(".instructions").innerText = "Fill in the menu and click prioritize:";
+    document.querySelector(".hw-menu").classList.toggle("invisible");
 }
-
-
-
-
-
-
-
-
-
-
-
-// /*makes numClassForm invisible and shows the classForm*/
-// function createClassForm() {
-//     numClassForm.classList.toggle("invisible");
-//     classForm.classList.toggle("invisible");
-//     instructions.innerText = "Write the name of your classes in order:";
-
-//     /*creates text inputs to write down the classes*/
-//     for (i = 0; i < (numOfClasses.value); i++) {
-//         var createClassForm = document.createElement("input");
-//         createClassForm.type = "text";
-//         createClassForm.classList.add("class-form-input");
-//         classForm.appendChild(createClassForm);
-//         classForm.appendChild(document.createElement("br"));
-//     }
-
-//     createNextButton(0);
-
-//     /*stores the name of the classes into classes.name*/
-//     document.querySelectorAll(".next-button")[0].onclick = function () {
-//         for (i = 0; i < (numOfClasses.value); i++) {
-//             classes[i] = new Object();
-//             classes[i].name = document.querySelectorAll(".class-form-input")[i].value;
-//         }
-//         console.log(classes);
-//         difficulty();
-//     };
-// }
-
-// function difficulty() {
-//     classForm.classList.toggle("invisible");
-//     document.querySelector(".difficulty").classList.toggle("invisible");
-//     instructions.innerText = "Rank your classes' difficulty from least to greatest:";
-
-//     for (i = 0; i < (numOfClasses.value); i++) {
-//         /*rewrites the classes in a list*/
-//         var classItemList = document.createElement("ul");
-//         var classItemListName = document.createTextNode(classes[i].name);
-//         classItemList.appendChild(classItemListName);
-//         classItemList.classList.add("class-item");
-//         document.querySelector(".classes-list").appendChild(classItemList);
-
-//         /*making difficulty dropdown menu*/
-//         var difficultySelect = document.createElement("select");
-//         difficultySelect.classList.add("select-difficulty");
-//         var valueCounter = 1;
-
-//         /*creates the options in dropdown menu*/
-//         for (x = 0; x < (numOfClasses.value); x++) {
-//             var difficultyOption = document.createElement("option");
-//             var difficultyNum = document.createTextNode(valueCounter);
-//             difficultyOption.appendChild(difficultyNum);
-//             difficultyOption.setAttribute("value", valueCounter);
-//             difficultySelect.appendChild(difficultyOption);
-//             valueCounter++;
-//         }
-
-//         difficultySelect.options[i].selected = true;
-
-//         /*makes the dropdown menu beside each item in the list*/
-//         var classItems = document.querySelectorAll("ul.class-item");
-//         for (y = 0; y < classItems.length; y++) {
-//             classItems[y].appendChild(difficultySelect);
-//         }
-//     }
-
-//     createNextButton(1);
-
-//     /*stores the difficulty of each class into classDifficulty*/
-//     document.querySelectorAll(".next-button")[1].onclick = function () {
-//         for (z = 0; z < numOfClasses.value; z++) {
-//             classes[z].difficulty = document.querySelectorAll(".select-difficulty")[z].value;
-//         }
-//         console.log(classes);
-
-//         document.querySelector(".difficulty").classList.toggle("invisible");
-//         document.querySelector(".hw-manager").classList.toggle("invisible");
-//         instructions.innerText = "Now, add your homework for any class";
-//     };
-// }
 
 
 /*Adds a text input, dropdown menus for type, class, and due date*/
 function addHomework() {
-    var homeworkItem = document.createElement("ul");
+    var homeworkItem = document.createElement("li");
 
     var hwInput = document.createElement("input");
     hwInput.type = "text";
@@ -157,26 +81,27 @@ function addHomework() {
     hwType.appendChild(homeworkMinor);
     hwType.appendChild(homeworkMajor);
 
-    // /*creates a dropdown menu for homework type, the options in it*/
-    // var hwClass = document.createElement("select");
-    // hwClass.classList.add("hw-class");
-    // for (i = 0; i < numOfClasses.value; i++) {
-    //     var classOption = document.createElement("option");
-    //     var classOptionName = document.createTextNode(classes[i].name);
-    //     classOption.appendChild(classOptionName);
-    //     classOption.setAttribute("value", classes[i].difficulty);
-    //     hwClass.appendChild(classOption);
-    // }
-
     /*creates a date dropdown menu*/
     var hwDate = document.createElement("input");
     hwDate.classList.add("hw-date");
     hwDate.setAttribute("type", "date");
+    hwDate.setAttribute("value", year + "-" + "0" + month + "-" + "0" + day);
+
+    /* creates a dropdown menu for what class the homework is for */
+    var hwClass = document.createElement("select");
+    hwClass.classList.add("hw-class");
+    for (i = 0; i < numOfClasses; i++) {
+        var classOption = document.createElement("option");
+        var classOptionName = document.createTextNode(classes[i].name);
+        classOption.appendChild(classOptionName);
+        classOption.setAttribute("value", classes[i].name)
+        hwClass.appendChild(classOption);
+    }
 
     homeworkItem.appendChild(hwInput);
     homeworkItem.appendChild(hwType);
-    // homeworkItem.appendChild(hwClass);
     homeworkItem.appendChild(hwDate);
+    homeworkItem.appendChild(hwClass);
 
     hwCounter.push(document.querySelector(".hw-list").appendChild(homeworkItem));
 }
@@ -188,7 +113,7 @@ function storeHW(numOfHw) {
         homeworks[i] = new Object();
         homeworks[i].name = document.querySelectorAll(".homework-input")[i].value;
         homeworks[i].type = document.querySelectorAll(".hw-type-dropdown")[i].value;
-        homeworks[i].classDiff = document.querySelectorAll(".hw-class")[i].value;
+        homeworks[i].class = document.querySelectorAll(".hw-class")[i].value;
         homeworks[i].dueDate = document.querySelectorAll(".hw-date")[i].value;
     }
     console.log(homeworks);
@@ -223,13 +148,13 @@ function prioritize(numOfHw) {
     console.log(priorList);
 
     /*shows the priority onto the web page*/
-    document.querySelector(".hw-manager").appendChild(document.createElement("h3")).innerText = "Here's how you should do your homework in order";
+    document.querySelector(".hw-menu").appendChild(document.createElement("h3")).innerText = "Here's how you should do your homework in order";
 
     for (x = 0; x < numOfHw; x++) {
         var priorHomework = document.createElement("ul");
         var priorHomeworkName = document.createTextNode((x + 1) + ") " + priorList[x]);
         priorHomework.appendChild(priorHomeworkName);
-        document.querySelector(".hw-manager").appendChild(priorHomework);
+        document.querySelector(".hw-menu").appendChild(priorHomework);
     }
 
 }

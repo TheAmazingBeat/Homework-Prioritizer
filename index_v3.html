@@ -17,21 +17,21 @@
 
     <!--Class Menu-->
     <div class="class-menu">
-        <button onclick="addClass()">Add Class</button>
-        <button onclick="deleteClass()">Delete Class</button>
+        <button class="class-menu-button" onclick="addClass()">Add Class</button>
+        <button class="class-menu-button" onclick="deleteClass()">Delete Class</button>
         <p class="invisible alert" style="color: red;">Please fill out the blanks</p>
         <ol class="class-list">
 
         </ol>
-        <button onclick="next()">Next</button>
+        <button class="class-menu-button" onclick="next()">Next</button>
     </div>
 
     <!--Menu to add homework and prioritize them-->
-    <div class="hw-manager invisible">
+    <div class="hw-menu invisible">
         <button class="hw-button" type="button" name="hw-adder" onclick="addHomework()">Add Homework</button>
-        <li class="hw-list" style="list-style-type:none">
+        <ul class="hw-list" style="list-style-type:none">
 
-        </li>
+        </ul>
         <button class="prioritize-button" type="button" onclick="prioritize(hwCounter.length)">Prioritize!</button>
     </div>
     <script src="script_v3.js"></script>
