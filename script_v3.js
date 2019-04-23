@@ -8,7 +8,7 @@ priorList = [];
 var numOfClasses = 0;
 var classItem;
 
-var date = new Data();
+var date = new Date();
 var year = date.getFullYear();
 var month = date.getMonth() + 1;
 var day = date.getDate();
@@ -39,25 +39,28 @@ function next(){
         if (document.querySelectorAll(".class-input")[x].value == "") {
             document.querySelector(".alert").classList.toggle("invisible");
             console.log("invisible");
-        } else if (document.querySelector(".alert").classList.contains("invisible") == false){
-            document.querySelector(".alert").classList.toggle("invisible");
-            console.log("not invisible");
+        } else if (!document.querySelectorAll(".class-input")[x].value == ""){
+            if(document.querySelector(".alert").classList.contains("invisible") == false){
+                document.querySelector(".alert").classList.toggle("invisible");
+                console.log("not invisible");
+            }
+
+            for(i = 0; i < numOfClasses; i++){
+                classes[i] = new Object();
+                classes[i].name = document.querySelectorAll(".class-input")[i].value;
+        
+                document.querySelectorAll(".class-input")[i].readOnly = "true";
+            }
+
+            for (y = 0; y < document.querySelectorAll(".class-menu-button").length; y++){
+                document.querySelectorAll(".class-menu-button")[y].classList.toggle("invisible");
+            }
+
+            document.querySelector(".instructions").innerText = "Fill in the menu and click prioritize:";
+            document.querySelector(".hw-menu").classList.toggle("invisible");
         }
     }
 
-    for(i = 0; i < numOfClasses; i++){
-        classes[i] = new Object();
-        classes[i].name = document.querySelectorAll(".class-input")[i].value;
-
-        document.querySelectorAll(".class-input")[i].readOnly = "true";
-    }
-
-    for (y = 0; y < document.querySelectorAll(".class-menu-button").length; y++){
-        document.querySelectorAll(".class-menu-button")[y].classList.toggle("invisible");
-    }
-
-    document.querySelector(".instructions").innerText = "Fill in the menu and click prioritize:";
-    document.querySelector(".hw-menu").classList.toggle("invisible");
 }
 
 
@@ -85,7 +88,7 @@ function addHomework() {
     var hwDate = document.createElement("input");
     hwDate.classList.add("hw-date");
     hwDate.setAttribute("type", "date");
-    hwDate.setAttribute("value", year + "-" + "0" + month + "-" + "0" + day);
+    hwDate.setAttribute("value", year + "-" + "0" + month + "-" + day);
 
     /* creates a dropdown menu for what class the homework is for */
     var hwClass = document.createElement("select");
