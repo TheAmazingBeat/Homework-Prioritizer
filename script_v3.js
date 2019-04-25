@@ -4,9 +4,10 @@ classesList = document.querySelector(".class-list");
 homeworks = [];
 hwCounter = [];
 instructions = document.querySelector(".instructions");
-priorList = [];
-priorityMajor = [];
-priorityMinor = [];
+priorNameList = [];
+priorDate = [];
+priorClass = [];
+priorType = [];
 var numOfClasses = 0;
 var classItem;
 /*Date objects*/
@@ -158,38 +159,44 @@ function compareHW(numOfHw){
 
         if(homeworks[i].type === "Major"){
             if(homeworks[i].dueDate <= homeworks[otherPosIndex].dueDate){
-                priorList.unshift(homeworks[i].name);
-                priorityMajor.unshift(homeworks[i].name);
-                console.log("Majors: " + priorityMajor);
-                console.log("priority:" + priorList);
+                priorNameList.unshift(homeworks[i].name);
+                priorType.unshift(homeworks[i].type);
+                priorDate.unshift(homeworks[i].dueDate);
+                priorClass.unshift(homeworks[i].class);
+                console.log("priority:" + priorNameList);
             } else if(homeworks[i].dueDate <= homeworks[otherNegIndex].dueDate){
-                priorList.splice(otherNegIndex, 0, homeworks[i].name);
-                priorityMajor.splice(otherNegIndex, 0, homeworks[i].name);
-                console.log("Majors: " + priorityMajor);
-                console.log("priority:" + priorList);
+                priorNameList.splice(otherNegIndex, 0, homeworks[i].name);
+                priorType.splice(otherNegIndex, 0, homeworks[i].type);
+                priorDate.splice(otherNegIndex, 0, homeworks[i].dueDate);
+                priorClass.splice(otherNegIndex, 0, homeworks[i].class);
+                console.log("priority:" + priorNameList);
             } else{
-                priorList.push(homeworks[i].name);
-                priorityMajor.push(homeworks[i].name);
-                console.log("Majors: " + priorityMajor);
-                console.log("priority:" + priorList);
+                priorNameList.push(homeworks[i].name);
+                priorType.push(homeworks[i].type);
+                priorDate.push(homeworks[i].dueDate);
+                priorClass.push(homeworks[i].class);
+                console.log("priority:" + priorNameList);
             }
 
         } else if(homeworks[i].type === "Minor"){
             if(homeworks[i].dueDate <= homeworks[otherPosIndex].dueDate){
-                priorList.unshift(homeworks[i].name)
-                priorityMinor.unshift(homeworks[i].name);
-                console.log("Minors: " + priorityMinor);
-                console.log("priority:" + priorList);
+                priorNameList.unshift(homeworks[i].name);
+                priorType.unshift(homeworks[i].type);
+                priorDate.unshift(homeworks[i].dueDate);
+                priorClass.unshift(homeworks[i].class);
+                console.log("priority:" + priorNameList);
             } else if (homeworks[i].dueDate <= homeworks[otherNegIndex].dueDate){
-                priorList.splice(otherNegIndex, 0, homeworks[i].name);
-                priorityMinor.splice(otherNegIndex, 0, homeworks[i].name);
-                console.log("Minors: " + priorityMinor);
-                console.log("priority:" + priorList);
+                priorNameList.splice(otherNegIndex, 0, homeworks[i].name);
+                priorType.splice(otherNegIndex, 0, homeworks[i].type);
+                priorDate.splice(otherNegIndex, 0, homeworks[i].dueDate);
+                priorClass.splice(otherNegIndex, 0, homeworks[i].class);
+                console.log("priority:" + priorNameList);
             } else{
-                priorList.push(homeworks[i].name);
-                priorityMinor.push(homeworks[i].name);
-                console.log("Minors: " + priorityMinor);
-                console.log("priority:" + priorList);
+                priorNameList.push(homeworks[i].name);
+                priorType.push(homeworks[i].type);
+                priorDate.push(homeworks[i].dueDate);
+                priorClass.push(homeworks[i].class);
+                console.log("priority:" + priorNameList);
             }
         }
     }
@@ -198,11 +205,11 @@ function compareHW(numOfHw){
 
 /*organizes the homework from highest difficulty and lowest difficulty*/
 function prioritize(numOfHw) {
-    priorList = [];
+    priorNameList = [];
 
     storeHW(numOfHw);
     compareHW(numOfHw);
-    console.log(priorList);
+    console.log(priorNameList);
 
     /*makes homework menu invisble*/
     document.querySelector(".instructions").innerText = "Here's how you should do your homework in order:";
@@ -211,10 +218,12 @@ function prioritize(numOfHw) {
     /*shows the priority onto the web page*/
     for (x = 0; x < numOfHw; x++) {
         var priorHomework = document.createElement("li");
+        priorHomework.classList.add("prior-item");
         priorHomework.style = "list-style: numbered"
-        var priorHomeworkName = document.createTextNode(priorList[x]);
+        var priorHomeworkName = document.createTextNode(priorNameList[x]);
         priorHomework.appendChild(priorHomeworkName);
         document.querySelector(".hw-prioritized").appendChild(priorHomework);
     }
 
+    
 }
