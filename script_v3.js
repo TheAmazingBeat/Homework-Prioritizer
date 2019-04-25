@@ -5,6 +5,8 @@ homeworks = [];
 hwCounter = [];
 instructions = document.querySelector(".instructions");
 priorList = [];
+priorityMajor = [];
+priorityMinor = [];
 var numOfClasses = 0;
 var classItem;
 /*Date objects*/
@@ -36,6 +38,7 @@ function addClass(){
 /*Deletes a text input*/
 function deleteClass(){
     document.querySelector(".class-item").parentElement.removeChild(document.querySelector(".class-item"));
+    numOfClasses--;
 }
 
 
@@ -58,7 +61,7 @@ function next(){
 
             document.querySelector(".class-menu").classList.toggle("invisible");
 
-            document.querySelector(".instructions").innerText = "Fill in the menu and click prioritize:";
+            document.querySelector(".instructions").innerText = "Fill out the homework menu below and click prioritize:";
             document.querySelector(".hw-menu").classList.toggle("invisible");
         }
     }
@@ -121,6 +124,7 @@ function addHomework() {
 /*Deletes a homework input*/
 function deleteHomework(){
     document.querySelector(".homework-item").parentElement.removeChild(document.querySelector(".homework-item"));
+    hwCounter--;
 }
 
 
@@ -137,25 +141,67 @@ function storeHW(numOfHw) {
 }
 
 
+function compareHW(numOfHw){
+    for(i = 0; i < numOfHw; i++){
+
+        if(i + 1 > numOfHw - 1){
+            var otherPosIndex = numOfHw - 1;
+        } else{
+            var otherPosIndex = i + 1;
+        }
+
+        if(i - 1 <= 0){
+            var otherNegIndex = 0;
+        } else{
+            var otherNegIndex = i - 1;
+        }
+
+        if(homeworks[i].type === "Major"){
+            if(homeworks[i].dueDate <= homeworks[otherPosIndex].dueDate){
+                priorList.unshift(homeworks[i].name);
+                priorityMajor.unshift(homeworks[i].name);
+                console.log("Majors: " + priorityMajor);
+                console.log("priority:" + priorList);
+            } else if(homeworks[i].dueDate <= homeworks[otherNegIndex].dueDate){
+                priorList.splice(otherNegIndex, 0, homeworks[i].name);
+                priorityMajor.splice(otherNegIndex, 0, homeworks[i].name);
+                console.log("Majors: " + priorityMajor);
+                console.log("priority:" + priorList);
+            } else{
+                priorList.push(homeworks[i].name);
+                priorityMajor.push(homeworks[i].name);
+                console.log("Majors: " + priorityMajor);
+                console.log("priority:" + priorList);
+            }
+
+        } else if(homeworks[i].type === "Minor"){
+            if(homeworks[i].dueDate <= homeworks[otherPosIndex].dueDate){
+                priorList.unshift(homeworks[i].name)
+                priorityMinor.unshift(homeworks[i].name);
+                console.log("Minors: " + priorityMinor);
+                console.log("priority:" + priorList);
+            } else if (homeworks[i].dueDate <= homeworks[otherNegIndex].dueDate){
+                priorList.splice(otherNegIndex, 0, homeworks[i].name);
+                priorityMinor.splice(otherNegIndex, 0, homeworks[i].name);
+                console.log("Minors: " + priorityMinor);
+                console.log("priority:" + priorList);
+            } else{
+                priorList.push(homeworks[i].name);
+                priorityMinor.push(homeworks[i].name);
+                console.log("Minors: " + priorityMinor);
+                console.log("priority:" + priorList);
+            }
+        }
+    }
+}
+
+
 /*organizes the homework from highest difficulty and lowest difficulty*/
 function prioritize(numOfHw) {
     priorList = [];
+
     storeHW(numOfHw);
-
-    for(i = 0; i < numOfHw; i++){
-        if(homeworks[i].type === "Major"){
-            for(y = 1; y < numOfHw; y++){
-                if(homeworks[i].dueDate < homeworks[y].dueDate){
-                    priorList.unshift(homeworks[i].name);
-                } else{
-                    priorList.push(homeworks[i].name);
-                }
-            }
-        } else{
-            priorList.push(homeworks[i].name);
-        }
-    }
-
+    compareHW(numOfHw);
     console.log(priorList);
 
     /*makes homework menu invisble*/
@@ -164,8 +210,9 @@ function prioritize(numOfHw) {
 
     /*shows the priority onto the web page*/
     for (x = 0; x < numOfHw; x++) {
-        var priorHomework = document.createElement("ul");
-        var priorHomeworkName = document.createTextNode((x + 1) + ") " + priorList[x]);
+        var priorHomework = document.createElement("li");
+        priorHomework.style = "list-style: numbered"
+        var priorHomeworkName = document.createTextNode(priorList[x]);
         priorHomework.appendChild(priorHomeworkName);
         document.querySelector(".hw-prioritized").appendChild(priorHomework);
     }
