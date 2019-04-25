@@ -3,18 +3,13 @@ body {
     font-family: 'Quicksand';
 }
 
-.class-form {
-    margin-left: 39%;
-}
-
-.class-form-input {
-    margin-top: 15px;
-    width: 250px;
-}
-
-.difficulty {
-    margin-left: 525px;
-}
+.center-screen {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
 
 .instructions {
     text-align: center;
@@ -25,47 +20,32 @@ body {
     display: none;
 }
 
-.middle {
-    margin-left: 40%;
-}
-
-.select-difficulty {
-    margin-left: 25px;
-}
-
-.start-button {
-    background-color: grey;
-    border: 0;
-    border-radius: 5px;
-    color: white;
-    font-family: 'Quicksand';
-    font-size: 20px;
-    height: 75px;
-    width: 125px;
-}
-
-.start-div {
-    padding-left: 45%;
-    padding-top: 5%;
-}
-
-.start-button:hover {
-    background-color: darkgrey;
-}
-
-.submit-button {
+.next-button {
     background-color: grey;
     border: 0;
     border-radius: 5px;
     color: white;
     font-family: 'Quicksand';
     height: 30px;
-    margin-left: 5px;
-    margin-top: 10px;
     width: 50px;
 }
 
-.submit-button:hover {
+.next-button:hover {
+    background-color: darkgrey;
+}
+
+.class-menu-button {
+    background-color: grey;
+    border: 0;
+    border-radius: 5px;
+    color: white;
+    font-family: 'Quicksand';
+    height: 30px;
+    margin-top: 10px;
+    width: 150px;
+}
+
+.class-menu-button:hover {
     background-color: darkgrey;
 }
 
@@ -75,10 +55,27 @@ body {
     text-align: center;
 }
 
-.center-screen {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-  }
+.hw-button {
+    background-color: grey;
+    border: 0;
+    border-radius: 5px;
+    color: white;
+    font-family: 'Quicksand';
+    height: 30px;
+    margin-top: 10px;
+    width: 150px;
+}
+
+.hw-button:hover {
+    background-color: darkgrey;
+}
+
+.prioritize-button {
+    background-color: grey;
+    border: 0;
+    border-radius: 5px;
+    color: white;
+    font-family: 'Quicksand';
+    height: 30px;
+    width: 75px;
+}

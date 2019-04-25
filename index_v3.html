@@ -17,30 +17,30 @@
         <h3 class="instructions">Write the name of your classes:</h3>
             
             
-                <!--Class Menu-->
-                <div class="class-menu">
-                    <button class="class-menu-button" onclick="addClass()">Add Class</button><br/>
-                    <button class="class-menu-button" onclick="deleteClass()">Delete Class</button>
-                    <p class="invisible alert" style="color: red;">Please fill out the blanks</p>
-                    <ol class="class-list" style="list-style: none;">
+        <!--Class Menu-->
+        <div class="class-menu">
+            <button class="class-menu-button" onclick="addClass()">Add Class</button>
+            <button class="class-menu-button" onclick="deleteClass()">Delete Class</button>
+            <p class="invisible alert" style="color: red;">Please fill out the blanks</p>
+            <ul class="class-list">
             
-                    </ol>
-                    <button class="class-menu-button" onclick="next()">Next</button>
-                </div>
+            </ul>
+            <button class="next-button" onclick="next()">Next</button>
+            </div>
             
-                <!--Menu to add homework and prioritize them-->
-                <div class="hw-menu invisible">
-                    <button class="hw-add-button" type="button" name="hw-adder" onclick="addHomework()">Add Homework</button>
-                    <button class="hw-delete-button" type="button" name="hw-deleter" onclick="deleteHomework()">Delete Homework</button>
-                    <ul class="hw-list" style="list-style-type:none">
+            <!--Menu to add homework and prioritize them-->
+            <div class="hw-menu invisible">
+                <button class="hw-add-button hw-button" type="button" name="hw-adder" onclick="addHomework()">Add Homework</button>
+                <button class="hw-delete-button hw-button" type="button" name="hw-deleter" onclick="deleteHomework()">Delete Homework</button>
+                <ul class="hw-list" style="list-style-type:none">
             
-                    </ul>
-                    <button class="prioritize-button" type="button" onclick="prioritize(hwCounter.length)">Prioritize!</button>
-                </div>
+                </ul>
+                <button class="prioritize-button hw-button" type="button" onclick="prioritize(hwCounter.length)">Prioritize!</button>
+            </div>
             
-                <div class="hw-prioritized">
+            <div class="hw-prioritized">
             
-                </div>
+            </div>
     </div>
     
     <script src="script_v3.js"></script>
