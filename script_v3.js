@@ -7,13 +7,16 @@ instructions = document.querySelector(".instructions");
 priorList = [];
 var numOfClasses = 0;
 var classItem;
-
+/*Date objects*/
 var date = new Date();
 var year = date.getFullYear();
 var month = date.getMonth() + 1;
 var day = date.getDate();
+/***************************************************************************/
 
 
+
+/*Adds text input for the names of classes*/
 function addClass(){
     numOfClasses++;
 
@@ -22,6 +25,7 @@ function addClass(){
     var classInput = document.createElement("input");
     classInput.classList.add("class-input");
     classInput.type = "text";
+    classInput.placeholder = "Class Name";
 
     classes.push("class-item");
     classItem.appendChild(classInput);
@@ -29,20 +33,20 @@ function addClass(){
 }
 
 
+/*Deletes a text input*/
 function deleteClass(){
     document.querySelector(".class-item").parentElement.removeChild(document.querySelector(".class-item"));
 }
 
 
+/*Input validation and moves on to the homework menu*/
 function next(){
     for (x = 0; x < numOfClasses; x++) {
         if (document.querySelectorAll(".class-input")[x].value == "") {
             document.querySelector(".alert").classList.toggle("invisible");
-            console.log("invisible");
         } else if (!document.querySelectorAll(".class-input")[x].value == ""){
             if(document.querySelector(".alert").classList.contains("invisible") == false){
                 document.querySelector(".alert").classList.toggle("invisible");
-                console.log("not invisible");
             }
 
             for(i = 0; i < numOfClasses; i++){
@@ -52,20 +56,13 @@ function next(){
                 document.querySelectorAll(".class-input")[i].readOnly = "true";
             }
 
-            for (y = 0; y < document.querySelectorAll(".class-menu-button").length; y++){
-                document.querySelectorAll(".class-menu-button")[y].classList.toggle("invisible");
-            }
+            document.querySelector(".class-menu").classList.toggle("invisible");
 
             document.querySelector(".instructions").innerText = "Fill in the menu and click prioritize:";
             document.querySelector(".hw-menu").classList.toggle("invisible");
         }
     }
 
-}
-
-
-function deleteHomework(){
-    document.querySelector(".homework-item").parentElement.removeChild(document.querySelector(".homework-item"));
 }
 
 
@@ -121,6 +118,12 @@ function addHomework() {
 }
 
 
+/*Deletes a homework input*/
+function deleteHomework(){
+    document.querySelector(".homework-item").parentElement.removeChild(document.querySelector(".homework-item"));
+}
+
+
 /*stores all values from input elements created in addHomework()*/
 function storeHW(numOfHw) {
     for (i = 0; i < numOfHw; i++) {
@@ -136,17 +139,35 @@ function storeHW(numOfHw) {
 
 /*organizes the homework from highest difficulty and lowest difficulty*/
 function prioritize(numOfHw) {
+    priorList = [];
     storeHW(numOfHw);
+
+    for(i = 0; i < numOfHw; i++){
+        if(homeworks[i].type === "Major"){
+            for(y = 1; y < numOfHw; y++){
+                if(homeworks[i].dueDate < homeworks[y].dueDate){
+                    priorList.unshift(homeworks[i].name);
+                } else{
+                    priorList.push(homeworks[i].name);
+                }
+            }
+        } else{
+            priorList.push(homeworks[i].name);
+        }
+    }
+
     console.log(priorList);
 
-    /*shows the priority onto the web page*/
-    document.querySelector(".hw-menu").appendChild(document.createElement("h3")).innerText = "Here's how you should do your homework in order";
+    /*makes homework menu invisble*/
+    document.querySelector(".instructions").innerText = "Here's how you should do your homework in order:";
+    document.querySelector(".hw-menu").classList.toggle("invisible");
 
+    /*shows the priority onto the web page*/
     for (x = 0; x < numOfHw; x++) {
         var priorHomework = document.createElement("ul");
         var priorHomeworkName = document.createTextNode((x + 1) + ") " + priorList[x]);
         priorHomework.appendChild(priorHomeworkName);
-        document.querySelector(".hw-menu").appendChild(priorHomework);
+        document.querySelector(".hw-prioritized").appendChild(priorHomework);
     }
 
 }

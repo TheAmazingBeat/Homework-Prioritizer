@@ -74,3 +74,11 @@ body {
     margin-top: 10px;
     text-align: center;
 }
+
+.center-screen {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
